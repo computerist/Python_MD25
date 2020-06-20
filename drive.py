@@ -3,9 +3,9 @@ dummy = True
 try:
     import smbus
     dummy = False
-    print 'smbus is available'
+    print('smbus is available')
 except:
-    print 'smbus not available; in dummy mode'
+    print('smbus not available; in dummy mode')
     
 import time
 
@@ -35,9 +35,9 @@ class md25:
         self.mode = mode
         self.address = address
         self.bus = None
-        print 'dummy is',dummy
+        print('dummy is',dummy)
         if not dummy:
-            print 'setting up SMBus'
+            print('setting up SMBus')
             self.bus = smbus.SMBus(bus)
             self.bus.write_byte_data(self.address,MD25_REGISTER_MODE, self.mode)
         
@@ -56,7 +56,7 @@ class md25:
                 raise ValueError("%s (%i) was out of range (%i - %i). %s"%(name, args[name], range[0], range[1], message))
     
     def drive(self, motor0=None, motor1=None, speed=None, turn=None):
-        print motor0, motor1, speed, turn
+        print(motor0, motor1, speed, turn)
         if 0 == self.mode:
             self.ensureSet({'motor0':motor0,'motor1':motor1}, all=False)
             self.ensureRange((1,255),{'motor0':motor0,'motor1':motor1})
